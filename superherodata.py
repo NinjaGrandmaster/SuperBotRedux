@@ -20,8 +20,9 @@ def get_hero_info(hero_name, info, query='', option=0):
         return hero_data
 
 
-def did_you_mean_list(unkown_name, suggestions=5):
-    distances = []
+# if a name is not recognized or misspelled generate suggestions of names from the data set
+def did_you_mean_list(unkown_name, num_of_sugg=5):
+    suggestions = []
     name_version = re.compile("(.*) (\(.*\))")
     for x in range(1450):
         name = str(df_csv.at[x, 'name'])
@@ -30,18 +31,18 @@ def did_you_mean_list(unkown_name, suggestions=5):
             # extract only the name if it is formatted like this Batman (1966)
             temp_name = name_version.search(name).group(1)
             ed = nltk.edit_distance(unkown_name, temp_name)
-            distances.append((name, ed))
+            suggestions.append((name, ed))
             # print(type(name), type(temp.group(1)))
         else:
             # calculate edit distance
             ed = nltk.edit_distance(unkown_name, name)
             # store names with edit distance
-            distances.append((name, ed))
+            suggestions.append((name, ed))
 
     # sort array of name, edit distance tuples and get first value as a suggestion
-    distances.sort(key=itemgetter(1))
-    # return first value in list as suggestion
-    return distances[:suggestions]
+    suggestions.sort(key=itemgetter(1))
+    # return suggestions list
+    return suggestions[:num_of_sugg]
 
 
 # gets a value from a list
@@ -98,10 +99,14 @@ def get_hero_names(hero_name):
     filtered_list = hero_df_filter.index.values.tolist()
 
     if len(filtered_list) == 0:
-        print("Name not found. Did you mean one of these entities")
-        temp_name = select_hero_from_tuple_list(did_you_mean_list(hero_name))
-        # print(temp_name)
-        temp_name = temp_name[0]
+        # work around for entering hero_name (version)
+        if hero_name in heroes_df.index:
+            temp_name = hero_name
+        else:
+            print("Name not found. Did you mean one of these entities")
+            temp_name = select_hero_from_tuple_list(did_you_mean_list(hero_name))
+            # print(temp_name)
+            temp_name = temp_name[0]
     elif len(filtered_list) == 1:
         temp_name = filtered_list[0]
     else:
@@ -111,4 +116,11 @@ def get_hero_names(hero_name):
     return temp_name
 
 
+def get_real_name(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'real_name', query='real name is')
 
+
+def get_superpowers(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'superpowers', query='powers')
