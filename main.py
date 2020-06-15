@@ -14,6 +14,8 @@ if __name__ == '__main__':
 
     # regular expressions
     real_name = re.compile(r'(.*) real name')
+    # checks if word/name ends with 's or ', such as Batman's, Abraxas',
+    name_possessive_form = re.compile(r'(.*)(\'s|\')')
     superpowers = re.compile(r'(w|W)hat powers does (.*) have')
 
     while True:
@@ -31,8 +33,14 @@ if __name__ == '__main__':
 
         # decision tree
         if real_name.match(userinput):
+
             name = real_name.search(userinput).group(1)
+            # check if user entered name in a possessive form and get name without the 's or ' if they did
+            if name_possessive_form.match(name):
+                name = name_possessive_form.search(name).group(1)
+
             sd.get_real_name(name)
+
         if superpowers.match(userinput):
             name = superpowers.search(userinput).group(2)
             sd.get_superpowers(name)

@@ -101,7 +101,7 @@ def get_hero_names(hero_name):
     if len(filtered_list) == 0:
         # work around for entering hero_name (version)
         if hero_name in heroes_df.index:
-            temp_name = hero_name
+            return hero_name
         else:
             print("Name not found. Did you mean one of these entities")
             temp_name = select_hero_from_tuple_list(did_you_mean_list(hero_name))
