@@ -1,8 +1,12 @@
 import pandas as pd
 import nltk
 import re
+import requests
+import tkinter as tk
 
+from io import BytesIO
 from operator import itemgetter
+from PIL import ImageTk, Image
 
 heroes_df = pd.read_csv('superheroes_nlp_dataset.csv', index_col='name')
 df_csv = pd.read_csv('superheroes_nlp_dataset.csv')
@@ -124,3 +128,32 @@ def get_real_name(hero_name):
 def get_superpowers(hero_name):
     name_check = get_hero_names(hero_name)
     get_hero_info(name_check, 'superpowers', query='powers')
+
+
+def get_overall_score(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'overall_score', query='overall score')
+
+
+def get_combat_score(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'combat_score', query='combat score')
+
+
+def get_hero_image(hero_name):
+    name_check = get_hero_names(hero_name)
+    image_url = get_hero_info(name_check, 'img', option=1)
+    # print('Extension_part', image_url, type(image_url))
+
+    if not pd.isna(image_url):
+        root = tk.Tk()
+        full_image_url = "https://www.superherodb.com" + image_url
+        response = requests.get(full_image_url)
+        img_data = response.content
+        img = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
+        panel = tk.Label(root, image=img)
+        panel.pack(side="bottom", fill="both", expand="yes")
+        panel2 = tk.Label(root, justify=tk.LEFT, padx=10, text=name_check).pack(side="top")
+        root.mainloop()
+    else:
+        print('No images of', name_check, 'exist')
