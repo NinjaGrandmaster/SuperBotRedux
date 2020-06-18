@@ -157,3 +157,17 @@ def get_hero_image(hero_name):
         root.mainloop()
     else:
         print('No images of', name_check, 'exist')
+
+
+def get_ability_scores(hero_name):
+    name_check = get_hero_names(hero_name)
+
+    scores = heroes_df.loc[name_check, 'intelligence_score':'power_score']
+    scores_list = scores.tolist()
+    print(scores)
+    print('\n---', name_check, '---')
+    print('Intelligence:', scores[0])
+    print('Strength:', scores_list[1])
+    print('Speed:', scores_list[2])
+    print('Durability:', scores_list[3])
+    print('Power:', scores_list[4], '')
