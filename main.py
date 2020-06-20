@@ -17,6 +17,9 @@ if __name__ == '__main__':
     # checks if word/name ends with 's or ', such as Batman's, Abraxas',
     name_possessive_form = re.compile(r'(.*)(\'s|\')')
 
+    # recognize capital names regex, requires that a heroes name be the only capitalized word(s) in question
+    capital_words = re.compile(r'\b([A-Z0-9\'][-a-zA-Z0-9]+\s?)\b')
+
     # decision tree regular expressions
     real_name = re.compile(r'(.*) real name')
     superpowers = re.compile(r'(w|W)hat powers does (.*) have')
@@ -24,6 +27,8 @@ if __name__ == '__main__':
     combat_score = re.compile(r'(.*) combat score')
     hero_image = re.compile(r'[wW]hat does (.*) look like')
     ability_scores = re.compile(r'(.*) ability scores')
+    # teams = re.compile(r'what teams (.*)')
+    teams = re.compile(r'(.*) teams')
 
     while True:
         userinput = input("> ")
@@ -73,5 +78,10 @@ if __name__ == '__main__':
 
             sd.get_ability_scores(name)
 
+        elif teams.match(userinput):
+            name = teams.search(userinput).group(1)
+            name = check_name_possessiveness(name)
+
+            sd.get_teams(name)
             print("Hello There", name)
 

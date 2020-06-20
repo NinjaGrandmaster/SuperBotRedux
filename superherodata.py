@@ -140,6 +140,36 @@ def get_combat_score(hero_name):
     get_hero_info(name_check, 'combat_score', query='combat score')
 
 
+def get_teams(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'teams', query='is part of the')
+
+
+def get_alignment(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'alignment', query='alignment is')
+
+
+def get_birth_place(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'place_of_birth', query='birth place is')
+
+
+def get_base(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'base', query='base location')
+
+
+def get_height(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'height', query='is')
+
+
+def get_weight(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'weight', query='weighs')
+
+
 def get_hero_image(hero_name):
     name_check = get_hero_names(hero_name)
     image_url = get_hero_info(name_check, 'img', option=1)
