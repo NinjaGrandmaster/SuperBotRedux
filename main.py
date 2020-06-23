@@ -29,6 +29,12 @@ if __name__ == '__main__':
     ability_scores = re.compile(r'(.*) ability scores')
     # teams = re.compile(r'what teams (.*)')
     teams = re.compile(r'(.*) teams')
+    birthplace = re.compile(r'where was (.*) born')
+    good_or_bad = re.compile(r'is (.*) (good|bad|evil)|(good or bad)|(good or evil)')
+    base_location = re.compile(r'where is (.*) base')
+    height = re.compile(r'how tall is (.*)')
+    weight = re.compile(r'((how much does)|(what does)) (.*) weigh\??')
+    hero_history = re.compile(r'what is (.*) backstory?')
 
     while True:
         userinput = input("> ")
@@ -83,5 +89,36 @@ if __name__ == '__main__':
             name = check_name_possessiveness(name)
 
             sd.get_teams(name)
+
+        elif birthplace.match(userinput):
+            name = birthplace.search(userinput).group(1)
+            name = check_name_possessiveness(name)
+            sd.get_birth_place(name)
+
+        elif base_location.match(userinput):
+            name = base_location.search(userinput).group(1)
+            name = check_name_possessiveness(name)
+
+            sd.get_base(name)
+
+        elif height.match(userinput):
+            name = height.search(userinput).group(1)
+            # name = check_name_possessiveness(name)
+
+            sd.get_height(name)
+
+        elif weight.match(userinput):
+            name = weight.search(userinput).group(4)
+
+            sd.get_weight(name)
+
+        elif hero_history.match(userinput):
+            name = hero_history.search(userinput).group(1)
+            name = check_name_possessiveness(name)
+
+            sd.get_hero_history(name)
             print("Hello There", name)
+
+        else:
+            print('Error processing input')
 

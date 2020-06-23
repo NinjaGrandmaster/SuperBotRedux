@@ -170,6 +170,11 @@ def get_weight(hero_name):
     get_hero_info(name_check, 'weight', query='weighs')
 
 
+def get_hero_history(hero_name):
+    name_check = get_hero_names(hero_name)
+    get_hero_info(name_check, 'history_text', query='')
+
+
 def get_hero_image(hero_name):
     name_check = get_hero_names(hero_name)
     image_url = get_hero_info(name_check, 'img', option=1)
