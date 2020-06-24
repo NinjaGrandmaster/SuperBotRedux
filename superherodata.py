@@ -237,3 +237,32 @@ def weight_comparison(hero1, hero2):
     else:
         print(hero1_name + " (" + hero1_weight_raw + ") and "
               + hero2_name + " (" + hero2_weight_raw + ") weigh the same.")
+
+
+def battle_1v1():
+
+    print('Welcome to battle simulator')
+
+    hero1_name = input('Enter first hero: ')
+    hero1_name = get_hero_names(hero1_name)
+    print(hero1_name, 'ready for battle\n')
+
+    hero2_name = input('Enter second hero: ')
+    hero2_name = get_hero_names(hero2_name)
+    print(hero2_name, 'ready for battle\n')
+
+    print('Simulating', hero1_name, 'vs.', hero2_name)
+
+    # get combat scores of the heroes
+    hero1_cs = get_hero_info(hero1_name, 'combat_score', option=1)
+    hero2_cs = get_hero_info(hero2_name, 'combat_score', option=1)
+
+    print(hero1_name, '-', hero1_cs, 'vs.', hero2_name, '-', hero2_cs)
+
+    # Compare combat scores
+    if int(hero1_cs) > int(hero2_cs):
+        print(hero1_name, 'defeats', hero2_name)
+    elif int(hero1_cs) < int(hero2_cs):
+        print(hero2_name, 'defeats', hero1_name)
+    else:
+        print(hero1_name, 'and', hero2_name, 'are evenly matched')

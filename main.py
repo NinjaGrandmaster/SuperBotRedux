@@ -37,6 +37,7 @@ if __name__ == '__main__':
     hero_history = re.compile(r'what is (.*) backstory?')
     # extract names when input such as Who weighs more Batman or Superman is detected
     weight_compare = re.compile(r'((.*)(weighs more)(.+)\bor\b(.+))\b(.*)')
+    battle_1v1 = re.compile(r'([sS]tart [bB]attle)|([bB]attle)')
 
     while True:
         userinput = input("> ")
@@ -129,7 +130,10 @@ if __name__ == '__main__':
 
             sd.weight_comparison(hero1, hero2)
 
-            print("Hello There", hero1, 'and', hero2)
+        elif battle_1v1.match(userinput):
+
+            sd.battle_1v1()
+            print('Battle Over')
 
         else:
             print('Error processing input')
