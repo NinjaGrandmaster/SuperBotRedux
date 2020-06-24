@@ -1,5 +1,6 @@
 import pandas as pd
 import nltk
+import random
 import re
 import requests
 import tkinter as tk
@@ -243,11 +244,11 @@ def battle_1v1():
 
     print('Welcome to battle simulator')
 
-    hero1_name = input('Enter first hero: ')
+    hero1_name = input('Enter first hero: ').strip()
     hero1_name = get_hero_names(hero1_name)
     print(hero1_name, 'ready for battle\n')
 
-    hero2_name = input('Enter second hero: ')
+    hero2_name = input('Enter second hero: ').strip()
     hero2_name = get_hero_names(hero2_name)
     print(hero2_name, 'ready for battle\n')
 
@@ -257,12 +258,49 @@ def battle_1v1():
     hero1_cs = get_hero_info(hero1_name, 'combat_score', option=1)
     hero2_cs = get_hero_info(hero2_name, 'combat_score', option=1)
 
-    print(hero1_name, '-', hero1_cs, 'vs.', hero2_name, '-', hero2_cs)
+    # print(hero1_name, '-', hero1_cs, 'vs.', hero2_name, '-', hero2_cs)
 
     # Compare combat scores
     if int(hero1_cs) > int(hero2_cs):
-        print(hero1_name, 'defeats', hero2_name)
+        # get a random power from the wining hero
+        power = random_power(hero1_name)
+
+        # check if the winning hero had any powers
+        if not power:
+            print(hero1_name, 'defeats', hero2_name)
+        else:
+            print(hero1_name, 'defeats', hero2_name, 'using', power)
+
     elif int(hero1_cs) < int(hero2_cs):
-        print(hero2_name, 'defeats', hero1_name)
+        # get a random power from the wining hero
+        power = random_power(hero2_name)
+
+        # check if the winning hero had any powers
+        if not power:
+            print(hero2_name, 'defeats', hero1_name)
+        else:
+            print(hero2_name, 'defeats', hero1_name, 'using', power)
+
     else:
         print(hero1_name, 'and', hero2_name, 'are evenly matched')
+
+    print('Battle Over \n')
+
+
+# get the superpowers or heroes from the data set which are stored as a string in the following form
+# ['Agility', 'Audio Control', 'Cryokinesis', 'Electrokinesis', 'Endurance', 'Enhanced Hearing']
+def random_power(hero_name):
+    list_item_regex = re.compile(r'\'([a-zA-Z\s\-\/]+)\'')
+    # get string containing powers
+    powers_string = get_hero_info(hero_name, 'superpowers', option=1)
+    # extract all powers which are surrounded by '' as a list
+    powers_list = list_item_regex.findall(powers_string)
+
+    # if hero has no powers return empty string else return a random power
+    if not powers_list:
+        # print('No powers')
+        return ''
+    else:
+        random_index = random.randrange(len(powers_list))
+
+        return powers_list[random_index]

@@ -133,7 +133,6 @@ if __name__ == '__main__':
         elif battle_1v1.match(userinput):
 
             sd.battle_1v1()
-            print('Battle Over')
 
         else:
             print('Error processing input')
