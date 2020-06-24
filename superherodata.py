@@ -27,7 +27,7 @@ def get_hero_info(hero_name, info, query='', option=0):
 # if a name is not recognized or misspelled generate suggestions of names from the data set
 def did_you_mean_list(unkown_name, num_of_sugg=5):
     suggestions = []
-    name_version = re.compile("(.*) (\(.*\))")
+    name_version = re.compile(r"(.*) (\(.*\))")
     for x in range(1450):
         name = str(df_csv.at[x, 'name'])
 
@@ -107,7 +107,7 @@ def get_hero_names(hero_name):
         if hero_name in heroes_df.index:
             return hero_name
         else:
-            print("Name not found. Did you mean one of these entities")
+            print("Entity " + hero_name + " not found. Did you mean one of these entities")
             temp_name = select_hero_from_tuple_list(did_you_mean_list(hero_name))
             # print(temp_name)
             temp_name = temp_name[0]
@@ -206,3 +206,34 @@ def get_ability_scores(hero_name):
     print('Speed:', scores_list[2])
     print('Durability:', scores_list[3])
     print('Power:', scores_list[4], '')
+
+
+def weight_comparison(hero1, hero2):
+    hero1_name = get_hero_names(hero1)
+    hero2_name = get_hero_names(hero2)
+
+    # gets weighs as string in the form 158 lb • 71 kg
+    hero1_weight_raw = get_hero_info(hero1_name, 'weight', option=1)
+    hero2_weight_raw = get_hero_info(hero2_name, 'weight', option=1)
+
+    # split the weighs string to get value for comparison
+    weight_list1 = hero1_weight_raw.split()
+    weight_list2 = hero2_weight_raw.split()
+
+    # get the first value in the weight lists for comparison
+    hero1_weight = weight_list1[0]
+    hero2_weight = weight_list2[0]
+
+    if hero1_weight == '-' or hero2_weight == '-':
+        print("Cannot compare " + hero1_name + " ("
+              + hero1_weight_raw + ") and " + hero2_name + " (" + hero2_weight_raw + ")")
+
+    elif int(hero1_weight) > int(hero2_weight):
+        print(hero1_name + " (" + hero1_weight_raw + ") weighs more than " + hero2_name + " (" + hero2_weight_raw + ")")
+
+    elif int(hero1_weight) < int(hero2_weight):
+        print(hero2_name + " (" + hero2_weight_raw + ") weighs more than " + hero1_name + " (" + hero1_weight_raw + ")")
+
+    else:
+        print(hero1_name + " (" + hero1_weight_raw + ") and "
+              + hero2_name + " (" + hero2_weight_raw + ") weigh the same.")

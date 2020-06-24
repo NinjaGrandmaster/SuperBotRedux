@@ -35,6 +35,8 @@ if __name__ == '__main__':
     height = re.compile(r'how tall is (.*)')
     weight = re.compile(r'((how much does)|(what does)) (.*) weigh\??')
     hero_history = re.compile(r'what is (.*) backstory?')
+    # extract names when input such as Who weighs more Batman or Superman is detected
+    weight_compare = re.compile(r'((.*)(weighs more)(.+)\bor\b(.+))\b(.*)')
 
     while True:
         userinput = input("> ")
@@ -117,7 +119,17 @@ if __name__ == '__main__':
             name = check_name_possessiveness(name)
 
             sd.get_hero_history(name)
-            print("Hello There", name)
+
+        elif weight_compare.match(userinput):
+            names = weight_compare.search(userinput)
+
+            # remove white spaces from the start and end of hero names
+            hero1 = names.group(4).strip()
+            hero2 = names.group(5).strip()
+
+            sd.weight_comparison(hero1, hero2)
+
+            print("Hello There", hero1, 'and', hero2)
 
         else:
             print('Error processing input')
