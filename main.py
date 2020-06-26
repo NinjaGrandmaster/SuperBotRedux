@@ -38,6 +38,7 @@ if __name__ == '__main__':
     # extract names when input such as Who weighs more Batman or Superman is detected
     weight_compare = re.compile(r'((.*)(weighs more)(.+)\bor\b(.+))\b(.*)')
     battle_1v1 = re.compile(r'([sS]tart [bB]attle)|([bB]attle)')
+    latest_news = re.compile(r'(.*)latest(\ssuperhero)?\snews')
 
     while True:
         userinput = input("> ")
@@ -133,6 +134,11 @@ if __name__ == '__main__':
         elif battle_1v1.match(userinput):
 
             sd.battle_1v1()
+
+        elif latest_news.match(userinput):
+
+            print()
+            sd.get_news()
 
         else:
             print('Error processing input')

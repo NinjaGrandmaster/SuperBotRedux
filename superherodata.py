@@ -5,6 +5,7 @@ import re
 import requests
 import tkinter as tk
 
+from bs4 import BeautifulSoup
 from io import BytesIO
 from operator import itemgetter
 from PIL import ImageTk, Image
@@ -304,3 +305,58 @@ def random_power(hero_name):
         random_index = random.randrange(len(powers_list))
 
         return powers_list[random_index]
+
+
+# get news articles from superherohype website
+def get_news():
+    # list to contain news articles
+    filtered_news = []
+
+    # use beautifulsoup to find superhero news articles
+    web_request = requests.get('https://www.superherohype.com/news')
+    soup = BeautifulSoup(web_request.content, features='lxml')
+    latest_news = soup.find_all('a')
+
+    for news in latest_news:
+        links = news.get('href')
+        title = news.get('title')
+        title = title
+
+        # tuple containing article title and article url
+        news_tuple = (title, links)
+
+        # if the article does have a title and is not already in the list add it to list
+        if title and news_tuple not in filtered_news:
+            filtered_news.append(news_tuple)
+
+    user_input = 'yes'
+
+    while user_input == 'yes':
+
+        num_articles = len(filtered_news)  # get number of avaliable articles
+
+        if num_articles > 5:
+            # print 5 articles from list
+            for i in range(5):
+                print(filtered_news[i][0])
+                print(filtered_news[i][1], '\n')
+
+            filtered_news = filtered_news[5:]  # remove the 5 already displayed articles from list
+
+            # show user the remaining articles and ask if they want to see more
+            print('Articles Remaining:', len(filtered_news))
+            user_input = input('Would you like to see more news? > ')
+            print()
+
+        elif num_articles == 0:
+            print("No articles available\n")
+            break
+
+        else:
+            # if there are less than 5 news articles print all
+            for i in range(len(filtered_news)):
+                print(filtered_news[i][0])
+                print(filtered_news[i][1], '\n')
+
+            print("End of available articles\n")
+            break
