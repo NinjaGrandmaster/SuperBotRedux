@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     # decision tree regular expressions
     real_name = re.compile(r'(.*) real name')
-    superpowers = re.compile(r'(w|W)hat powers does (.*) have')
+    superpowers = re.compile(r'([wW])hat powers does (.*) have')
     overall_score = re.compile(r'(.*) overall score')
     combat_score = re.compile(r'(.*) combat score')
     hero_image = re.compile(r'[wW]hat does (.*) look like')
@@ -30,8 +30,8 @@ if __name__ == '__main__':
     # teams = re.compile(r'what teams (.*)')
     teams = re.compile(r'(.*) teams')
     birthplace = re.compile(r'where was (.*) born')
-    good_or_bad = re.compile(r'is (.*) (good|bad|evil)|(good or bad)|(good or evil)')
     base_location = re.compile(r'where is (.*) base')
+    good_or_bad = re.compile(r'is (.*) (good|bad|evil)|(good or bad)|(good or evil)')
     height = re.compile(r'how tall is (.*)')
     weight = re.compile(r'((how much does)|(what does)) (.*) weigh\??')
     hero_history = re.compile(r'what is (.*) backstory?')
@@ -105,6 +105,11 @@ if __name__ == '__main__':
 
             sd.get_base(name)
 
+        elif good_or_bad.match(userinput):
+            name = good_or_bad.search(userinput).group(1)
+
+            sd.get_alignment(name)
+
         elif height.match(userinput):
             name = height.search(userinput).group(1)
             # name = check_name_possessiveness(name)
@@ -142,4 +147,3 @@ if __name__ == '__main__':
 
         else:
             print('Error processing input')
-

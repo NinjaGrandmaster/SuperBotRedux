@@ -149,7 +149,7 @@ def get_teams(hero_name):
 
 def get_alignment(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'alignment', query='alignment is')
+    get_hero_info(name_check, 'alignment', query='is')
 
 
 def get_birth_place(hero_name):
