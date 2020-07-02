@@ -3,6 +3,7 @@ import nltk
 import random
 import re
 import requests
+import textwrap
 import tkinter as tk
 
 from bs4 import BeautifulSoup
@@ -122,6 +123,11 @@ def get_hero_names(hero_name):
     return temp_name
 
 
+# prints text by wraping text to a set width, can be changed with variable text_width
+def print_textwrap(text, text_width=80):
+    print(textwrap.fill(text, width=text_width))
+
+
 def get_real_name(hero_name):
     name_check = get_hero_names(hero_name)
     get_hero_info(name_check, 'real_name', query='real name is')
@@ -174,7 +180,11 @@ def get_weight(hero_name):
 
 def get_hero_history(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'history_text', query='')
+    history_text = get_hero_info(name_check, 'history_text', option=1)
+
+    print()
+    print_textwrap(history_text, text_width=100)
+    print()
 
 
 def get_hero_image(hero_name):
