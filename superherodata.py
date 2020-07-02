@@ -182,6 +182,10 @@ def get_hero_history(hero_name):
     name_check = get_hero_names(hero_name)
     history_text = get_hero_info(name_check, 'history_text', option=1)
 
+    # If back story is not contained in the hero data set csv set history as unknown
+    if pd.isna(history_text):
+        history_text = 'Backstory unknown for ' + name_check
+
     print()
     print_textwrap(history_text, text_width=100)
     print()
