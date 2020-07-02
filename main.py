@@ -23,6 +23,7 @@ if __name__ == '__main__':
     # decision tree regular expressions
     real_name = re.compile(r'(.*) real name')
     superpowers = re.compile(r'([wW])hat powers does (.*) have')
+    decribe_powers = re.compile(r'[Dd]escribe (.*) powers')
     overall_score = re.compile(r'(.*) overall score')
     combat_score = re.compile(r'(.*) combat score')
     hero_image = re.compile(r'[wW]hat does (.*) look like')
@@ -60,6 +61,13 @@ if __name__ == '__main__':
             name = superpowers.search(userinput).group(2)
 
             sd.get_superpowers(name)
+
+        elif decribe_powers.match(userinput):
+
+            name = decribe_powers.search(userinput).group(1)
+            name = check_name_possessiveness(name)
+
+            sd.get_powers_decription(name)
 
         elif overall_score.match(userinput):
 

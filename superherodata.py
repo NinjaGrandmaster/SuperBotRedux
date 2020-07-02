@@ -138,6 +138,31 @@ def get_superpowers(hero_name):
     get_hero_info(name_check, 'superpowers', query='powers')
 
 
+def get_powers_decription(hero_name):
+    missing_data_text = 'Powers description not available in data banks'
+
+    name_check = get_hero_names(hero_name)
+
+    powers_text = get_hero_info(name_check, 'powers_text', option=1)
+
+    # check for nan pandas value, which means missing field within the superhero data set csv
+    # NOTE: this is different than a an empty string and must be checked separately
+    if pd.isna(powers_text):
+        powers_text = missing_data_text
+
+    # strip white space from beginning and end of string. Need to do this to check for empty string
+    powers_text = powers_text.strip()
+
+    # check for empty string
+    if not powers_text:
+        powers_text = missing_data_text
+
+    # print powers description
+    print()
+    print_textwrap(powers_text, text_width=100)
+    print()
+
+
 def get_overall_score(hero_name):
     name_check = get_hero_names(hero_name)
     get_hero_info(name_check, 'overall_score', query='overall score')
