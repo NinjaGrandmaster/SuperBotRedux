@@ -216,6 +216,30 @@ def get_hero_history(hero_name):
     print()
 
 
+def get_occupation(hero_name):
+    name_check = get_hero_names(hero_name)
+
+    occupations = get_hero_info(name_check, 'occupation', option=1)
+
+    if pd.isna(occupations):
+        occupations = 'unknown'
+
+    print(name_check, 'occupation(s)', occupations)
+
+
+def get_relatives(hero_name):
+    name_check = get_hero_names(hero_name)
+
+    relatives = get_hero_info(name_check, 'relatives', option=1)
+
+    if pd.isna(relatives):
+        relatives = 'unknown'
+
+    print(name_check, 'relative(s)')
+    print_textwrap(relatives, text_width=100)
+    print()
+
+
 def get_hero_image(hero_name):
     name_check = get_hero_names(hero_name)
     image_url = get_hero_info(name_check, 'img', option=1)

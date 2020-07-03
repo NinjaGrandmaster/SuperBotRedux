@@ -36,6 +36,8 @@ if __name__ == '__main__':
     height = re.compile(r'how tall is (.*)')
     weight = re.compile(r'((how much does)|(what does)) (.*) weigh\??')
     hero_history = re.compile(r'what is (.*) backstory?')
+    occupation = re.compile(r'[wW]hat is (.*) (occupation|job)(.*)')
+    relatives = re.compile(r'[wW]ho (are|is) (.*) (relatives|family)(.*)')
     # extract names when input such as Who weighs more Batman or Superman is detected
     weight_compare = re.compile(r'((.*)(weighs more)(.+)\bor\b(.+))\b(.*)')
     battle_1v1 = re.compile(r'([sS]tart [bB]attle)|([bB]attle)')
@@ -134,6 +136,18 @@ if __name__ == '__main__':
             name = check_name_possessiveness(name)
 
             sd.get_hero_history(name)
+
+        elif occupation.match(userinput):
+            name = occupation.search(userinput).group(1)
+            name = check_name_possessiveness(name)
+
+            sd.get_occupation(name)
+
+        elif relatives.match(userinput):
+            name = relatives.search(userinput).group(2)
+            name = check_name_possessiveness(name)
+
+            sd.get_relatives(name)
 
         elif weight_compare.match(userinput):
             names = weight_compare.search(userinput)
