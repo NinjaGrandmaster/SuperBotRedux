@@ -42,6 +42,8 @@ if __name__ == '__main__':
     weight_compare = re.compile(r'((.*)(weighs more)(.+)\bor\b(.+))\b(.*)')
     battle_1v1 = re.compile(r'([sS]tart [bB]attle)|([bB]attle)')
     latest_news = re.compile(r'(.*)latest(\ssuperhero)?\snews')
+    random_hero_story = \
+        re.compile(r'(.*)((history|backstory) of a random hero)(.*)|(.*)(random (history|backstory))(.*)')
 
     while True:
         userinput = input("> ")
@@ -166,6 +168,10 @@ if __name__ == '__main__':
 
             print()
             sd.get_news()
+
+        elif random_hero_story.match(userinput):
+
+            sd.get_random_history()
 
         else:
             print('Error processing input')

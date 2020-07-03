@@ -12,7 +12,7 @@ from operator import itemgetter
 from PIL import ImageTk, Image
 
 heroes_df = pd.read_csv('superheroes_nlp_dataset.csv', index_col='name')
-df_csv = pd.read_csv('superheroes_nlp_dataset.csv')
+heroes_df_csv = pd.read_csv('superheroes_nlp_dataset.csv')
 
 
 # option 0: print info with query statement, option 1: return the retrieved data
@@ -32,7 +32,7 @@ def did_you_mean_list(unkown_name, num_of_sugg=5):
     suggestions = []
     name_version = re.compile(r"(.*) (\(.*\))")
     for x in range(1450):
-        name = str(df_csv.at[x, 'name'])
+        name = str(heroes_df_csv.at[x, 'name'])
 
         if name_version.match(name):
             # extract only the name if it is formatted like this Batman (1966)
@@ -203,8 +203,15 @@ def get_weight(hero_name):
     get_hero_info(name_check, 'weight', query='weighs')
 
 
-def get_hero_history(hero_name):
-    name_check = get_hero_names(hero_name)
+# only pick option 1 if you know for sure the name(s) being passed in exist in the data set, other wise leave option as
+# 0
+def get_hero_history(hero_name, option=0):
+
+    if option == 1:
+        name_check = hero_name
+    else:
+        name_check = get_hero_names(hero_name)
+
     history_text = get_hero_info(name_check, 'history_text', option=1)
 
     # If back story is not contained in the hero data set csv set history as unknown
@@ -423,3 +430,13 @@ def get_news():
 
             print("End of available articles\n")
             break
+
+
+def get_random_history():
+    index = random.randint(0, 1450)  # random index of a superhero
+
+    name = heroes_df_csv.at[index, 'name']  # get name of hero
+
+    # dsisplay history
+    print('\nThis is the history of', name)
+    get_hero_history(name, option=1)
