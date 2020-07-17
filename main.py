@@ -21,7 +21,7 @@ if __name__ == '__main__':
     capital_words = re.compile(r'\b([A-Z0-9\'][-a-zA-Z0-9]+\s?)\b')
 
     # decision tree regular expressions
-    real_name = re.compile(r'(.*) real name')
+    real_name = re.compile(r'([wW]hat is|[tT]ell me)?(.*) real name')
     superpowers = re.compile(r'([wW])hat powers does (.*) have')
     decribe_powers = re.compile(r'[Dd]escribe (.*) powers')
     overall_score = re.compile(r'(.*) overall score')
@@ -55,7 +55,7 @@ if __name__ == '__main__':
         # decision tree
         if real_name.match(userinput):
 
-            name = real_name.search(userinput).group(1)
+            name = real_name.search(userinput).group(2).strip()
             name = check_name_possessiveness(name)
 
             sd.get_real_name(name)

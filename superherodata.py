@@ -130,7 +130,14 @@ def print_textwrap(text, text_width=80):
 
 def get_real_name(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'real_name', query='real name is')
+
+    # get_hero_info(name_check, 'real_name', query='real name is')
+    real_name = get_hero_info(name_check, 'real_name', option=1)
+
+    if pd.isna(real_name):
+        real_name = 'unknown'
+
+    print(name_check + '\'s real name is', real_name, '\n')
 
 
 def get_superpowers(hero_name):
