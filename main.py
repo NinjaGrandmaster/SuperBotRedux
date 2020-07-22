@@ -24,10 +24,10 @@ if __name__ == '__main__':
     real_name = re.compile(r'([wW]hat is|[tT]ell me)?(.*) real name')
     superpowers = re.compile(r'([wW])hat powers does (.*) have')
     decribe_powers = re.compile(r'[Dd]escribe (.*) powers')
-    overall_score = re.compile(r'(.*) overall score')
-    combat_score = re.compile(r'(.*) combat score')
+    overall_score = re.compile(r'([wW]hat is|[tT]ell me)?(.*) overall score\??')
+    combat_score = re.compile(r'([wW]hat is|[tT]ell me)?(.*) combat score\??')
     hero_image = re.compile(r'[wW]hat does (.*) look like')
-    ability_scores = re.compile(r'(.*) ability scores')
+    ability_scores = re.compile(r'([wW]hat are|[tT]ell me)?(.*) ability scores?\??')
     # teams = re.compile(r'what teams (.*)')
     teams = re.compile(r'(.*) teams')
     birthplace = re.compile(r'where was (.*) born')
@@ -75,14 +75,14 @@ if __name__ == '__main__':
 
         elif overall_score.match(userinput):
 
-            name = overall_score.search(userinput).group(1)
+            name = overall_score.search(userinput).group(2).strip()
             name = check_name_possessiveness(name)
 
             sd.get_overall_score(name)
 
         elif combat_score.match(userinput):
 
-            name = combat_score.search(userinput).group(1)
+            name = combat_score.search(userinput).group(2).strip()
             name = check_name_possessiveness(name)
 
             sd.get_combat_score(name)
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
         elif ability_scores.match(userinput):
 
-            name = ability_scores.search(userinput).group(1)
+            name = ability_scores.search(userinput).group(2).strip()
             name = check_name_possessiveness(name)
 
             sd.get_ability_scores(name)
