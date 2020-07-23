@@ -29,13 +29,13 @@ if __name__ == '__main__':
     hero_image = re.compile(r'[wW]hat does (.*) look like')
     ability_scores = re.compile(r'([wW]hat are|[tT]ell me)?(.*) ability scores?\??')
     # teams = re.compile(r'what teams (.*)')
-    teams = re.compile(r'(.*) teams')
-    birthplace = re.compile(r'where was (.*) born')
-    base_location = re.compile(r'where is (.*) base')
-    good_or_bad = re.compile(r'is (.*) (good|bad|evil)|(good or bad)|(good or evil)')
-    height = re.compile(r'how tall is (.*)')
-    weight = re.compile(r'((how much does)|(what does)) (.*) weigh\??')
-    hero_history = re.compile(r'what is (.*) backstory?')
+    teams = re.compile(r'([wW]hich|[wW]hat) teams? is (.*) (on|a part of)\??')
+    birthplace = re.compile(r'[wW]here was (.*) born')
+    base_location = re.compile(r'[wW]here is (.*) base')
+    good_or_bad = re.compile(r'[iI]s (.*) (good|bad|evil)|(good or bad)|(good or evil)')
+    height = re.compile(r'[hH]ow tall is (.*)')
+    weight = re.compile(r'(([hH]ow much does)|([wW]hat does)) (.*) weigh\??')
+    hero_history = re.compile(r'[wW]hat is (.*) backstory?')
     occupation = re.compile(r'[wW]hat is (.*) (occupation|job)(.*)')
     relatives = re.compile(r'[wW]ho (are|is) (.*) (relatives|family)(.*)')
     # extract names when input such as Who weighs more Batman or Superman is detected
@@ -101,7 +101,7 @@ if __name__ == '__main__':
             sd.get_ability_scores(name)
 
         elif teams.match(userinput):
-            name = teams.search(userinput).group(1)
+            name = teams.search(userinput).group(2).strip()
             name = check_name_possessiveness(name)
 
             sd.get_teams(name)
