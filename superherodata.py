@@ -137,6 +137,7 @@ def get_real_name(hero_name):
     if pd.isna(real_name):
         real_name = 'unknown'
 
+    print()
     print(name_check + '\'s real name is', real_name, '\n')
 
 
@@ -187,17 +188,38 @@ def get_teams(hero_name):
 
 def get_alignment(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'alignment', query='is')
+
+    alignment = get_hero_info(name_check, 'alignment', option=1)
+
+    print()
+    if pd.isna(alignment):
+        print(name_check + '\'s alignment is unknown\n')
+    else:
+        print(name_check + ' is considered to be ' + alignment, '\n')
 
 
 def get_birth_place(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'place_of_birth', query='birth place is')
+
+    birth_place = get_hero_info(name_check, 'place_of_birth', option=1)
+
+    if pd.isna(birth_place):
+        birth_place = 'unknown'
+
+    print()
+    print(name_check + ' \'s place of bith is ' + birth_place + '\n')
 
 
 def get_base(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'base', query='base location')
+
+    base_location = get_hero_info(name_check, 'base', option=1)
+
+    if pd.isna(base_location):
+        base_location = 'unknown'
+
+    print()
+    print(name_check + '\'s base(s): ' + base_location + '\n')
 
 
 def get_height(hero_name):
