@@ -240,7 +240,18 @@ def get_height(hero_name):
 
 def get_weight(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'weight', query='weighs')
+
+    weight = get_hero_info(name_check, 'weight', option=1)
+
+    print()
+    if weight == '-':
+        print(name_check + '\'s weight is unknown\n')
+    else:
+        # array of the format ['198', 'lb', 'dot', '89', 'kg']
+        # index 0 has height in ft, index 2 had height in cm
+        weight_array = weight.split()
+
+        print(name_check + '\'s weighs ' + weight_array[0] + ' lb (' + weight_array[3] + ' kg)\n')
 
 
 # only pick option 1 if you know for sure the name(s) being passed in exist in the data set, other wise leave option as
