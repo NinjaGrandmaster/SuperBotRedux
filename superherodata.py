@@ -224,7 +224,18 @@ def get_base(hero_name):
 
 def get_height(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'height', query='is')
+
+    height = get_hero_info(name_check, 'height', option=1)
+
+    print()
+    if height == '-':
+        print(name_check + '\'s height is unknown\n')
+    else:
+        # array of the format ["6'4", 'dot', '193', 'cm']
+        # index 0 has height in ft, index 2 had height in cm
+        height_array = height.split()
+
+        print(name_check + '\'s height is ' + height_array[0] + ' (' + height_array[2] + ' cm)\n')
 
 
 def get_weight(hero_name):

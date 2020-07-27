@@ -34,6 +34,7 @@ if __name__ == '__main__':
     base_location = re.compile(r'[wW]here is (.*) base')
     good_or_bad = re.compile(r'[iI]s (.*) (good|bad|evil)|(good or bad)|(good or evil)')
     height = re.compile(r'[hH]ow tall is (.*)')
+    ending_quest = re.compile(r'(.*)\?')  # used to remove a trailing ? from the height regex
     weight = re.compile(r'(([hH]ow much does)|([wW]hat does)) (.*) weigh\??')
     hero_history = re.compile(r'[wW]hat is (.*) backstory?')
     occupation = re.compile(r'[wW]hat is (.*) (occupation|job)(.*)')
@@ -124,6 +125,9 @@ if __name__ == '__main__':
 
         elif height.match(userinput):
             name = height.search(userinput).group(1)
+
+            if ending_quest.match(name):
+                name = ending_quest.search(name).group(1)
             # name = check_name_possessiveness(name)
 
             sd.get_height(name)
