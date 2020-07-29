@@ -142,8 +142,41 @@ def get_real_name(hero_name):
 
 
 def get_superpowers(hero_name):
+    # regex to extract powers from string containing them
+    # string of the form is ['Agility', 'Audio Control', 'Cold Resistance', 'Danger Sense', 'Electrokinesis]
+    list_item_regex = re.compile(r'\'([a-zA-Z\s\-/]+)\'')
+
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'superpowers', query='powers')
+    powers_string = get_hero_info(name_check, 'superpowers', option=1)
+
+    powers_list = list_item_regex.findall(powers_string)
+
+    powers_list_size = len(powers_list)
+
+    print()
+
+    if powers_list_size == 1:
+
+        print(name_check + '\'s power is ' + powers_list[0])
+
+    elif powers_list_size == 2:
+
+        print(name_check + '\'s powers are ' + powers_list[0] + ' and ' + powers_list[1])
+
+    elif powers_list_size > 2:
+
+        # get last power to add an 'and' before it in the list of powers before being displayed
+        last_power = powers_list.pop()
+        concat_string = ', '.join(powers_list) + ', and ' + last_power
+
+        powers_out_string = name_check + '\'s powers are ' + concat_string
+
+        print_textwrap(powers_out_string, text_width=100)
+
+    else:
+        print(name_check, 'has no powers')
+
+    print()
 
 
 def get_powers_decription(hero_name):
@@ -412,7 +445,7 @@ def battle_1v1():
 # get the superpowers or heroes from the data set which are stored as a string in the following form
 # ['Agility', 'Audio Control', 'Cryokinesis', 'Electrokinesis', 'Endurance', 'Enhanced Hearing']
 def random_power(hero_name):
-    list_item_regex = re.compile(r'\'([a-zA-Z\s\-\/]+)\'')
+    list_item_regex = re.compile(r'\'([a-zA-Z\s\-/]+)\'')
     # get string containing powers
     powers_string = get_hero_info(hero_name, 'superpowers', option=1)
     # extract all powers which are surrounded by '' as a list
