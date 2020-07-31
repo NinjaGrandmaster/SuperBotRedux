@@ -206,7 +206,17 @@ def get_powers_decription(hero_name):
 
 def get_overall_score(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'overall_score', query='overall score')
+
+    o_score = get_hero_info(name_check, 'overall_score', option=1)
+
+    inf_unicode = "\u221E"  # unicode of the infinity symbol
+
+    if o_score == inf_unicode:
+        print('\n' + name_check + ' has an infinite overall score!!!\n')
+    elif o_score == '-':
+        print('\nInsufficient data to compute an overall score for entity ' + name_check + '\n')
+    else:
+        print('\n' + name_check + '\'s overall score is ' + o_score + '\n ')
 
 
 def get_combat_score(hero_name):
