@@ -144,12 +144,11 @@ def get_real_name(hero_name):
 def get_superpowers(hero_name):
     # regex to extract powers from string containing them
     # string of the form is ['Agility', 'Audio Control', 'Cold Resistance', 'Danger Sense', 'Electrokinesis]
-    list_item_regex = re.compile(r'\'([a-zA-Z\s\-/]+)\'')
 
     name_check = get_hero_names(hero_name)
     powers_string = get_hero_info(name_check, 'superpowers', option=1)
 
-    powers_list = list_item_regex.findall(powers_string)
+    powers_list = string_list_convert(powers_string)
 
     powers_list_size = len(powers_list)
 
@@ -230,6 +229,31 @@ def get_combat_score(hero_name):
 def get_teams(hero_name):
     name_check = get_hero_names(hero_name)
     get_hero_info(name_check, 'teams', query='is part of the')
+
+    team_list_string = get_hero_info(name_check, 'teams', option=1)
+    # extract teams from the string retrieved from the data set
+    team_list = string_list_convert(team_list_string)
+
+    print(team_list)
+
+    team_list_size = len(team_list)
+
+    if team_list_size == 0:
+        print('\n' + name_check + ' is not a part of a team\n')
+    elif team_list_size == 1:
+        print('\n' + name_check + '\'s team is the ' + team_list[0] + '\n')
+    elif team_list_size == 2:
+        print('\n' + name_check + ' is on teams ' + team_list[0] + ' and ' + team_list[1] + '\n')
+    else:
+        # get last power to add an 'and' before it in the list of powers before being displayed
+        last_team = team_list.pop()
+        concat_string = ', '.join(team_list) + ', and ' + last_team
+
+        team_out_string = name_check + '\'s teams are ' + concat_string
+
+        print()
+        print_textwrap(team_out_string, text_width=100)
+        print()
 
 
 def get_alignment(hero_name):
@@ -537,3 +561,16 @@ def get_random_history():
     # dsisplay history
     print('\nThis is the history of', name)
     get_hero_history(name, option=1)
+
+
+# converts strings that contain list items from the data set to a python list. samples of the strings are
+# ['Agility', 'Audio Control', 'Cold Resistance', 'Danger Sense', 'Electrokinesis] - superpowers
+# ['Teen Titans', 'New Teen Titans', 'Justice League', 'Outlaws'] - teams
+def string_list_convert(list_string):
+    # string of the form is ['Agility', 'Audio Control', 'Cold Resistance', 'Danger Sense', 'Electrokinesis]
+    list_item_regex = re.compile(r'\'([a-zA-Z\s\-/.]+)\'')
+
+    # extract all powers which are surrounded by '' as a list
+    powers_list = list_item_regex.findall(list_string)
+
+    return powers_list
