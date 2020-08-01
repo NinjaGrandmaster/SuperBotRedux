@@ -221,7 +221,10 @@ def get_overall_score(hero_name):
 
 def get_combat_score(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'combat_score', query='combat score')
+
+    c_score = get_hero_info(name_check, 'combat_score', option=1)
+
+    print('\n' + name_check + '\'s combat score is ' + str(c_score) + '\n')
 
 
 def get_teams(hero_name):
