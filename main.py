@@ -1,4 +1,6 @@
+import botresponse as br
 import superherodata as sd
+
 import sys
 import re
 
@@ -45,6 +47,10 @@ if __name__ == '__main__':
     latest_news = re.compile(r'(.*)latest(\ssuperhero)?\snews')
     random_hero_story = \
         re.compile(r'(.*)((history|backstory) of a random hero)(.*)|(.*)(random (history|backstory))(.*)')
+
+    help_menu = re.compile(r'(.*)help(.*)')
+
+    br.opening()  # display welcome message/bot opening speech
 
     while True:
         userinput = input("> ")
@@ -176,6 +182,12 @@ if __name__ == '__main__':
         elif random_hero_story.match(userinput):
 
             sd.get_random_history()
+
+        elif help_menu.match(userinput):
+
+            print('display help menu')
+
+            br.help_menu()
 
         else:
             print('Error processing input')
