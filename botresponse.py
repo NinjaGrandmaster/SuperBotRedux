@@ -9,16 +9,17 @@ def rand_index(num):
 
 def help_menu():
 
-    help_response_list = ['\nHere are my available functions.\n',
-                          '\nTheses are the types of questions my creators enabled me to answer.\n',
-                          '\nHere is what I can answer.\n',
-                          '\nNo problem here are my capabilities.\n']
+    help_response_list = ['\nHere are my available functions.',
+                          '\nTheses are the types of questions my creators enabled me to answer.',
+                          '\nHere is what I can answer.',
+                          '\nNo problem here are my capabilities.']
 
     index = rand_index(len(help_response_list))
 
     print(Fore.LIGHTCYAN_EX + help_response_list[index])
 
-    print(Fore.LIGHTYELLOW_EX + "-------------------------HELP-----------------------------")
+    print(Fore.LIGHTYELLOW_EX)
+    print("-------------------------HELP-----------------------------")
     print("| There are numerous ways in which you can use Super Bot!|")
     print("| You can type/enter input such as:                      |")
     print("|                                                        |")
@@ -32,7 +33,7 @@ def help_menu():
     print("| what is/tell me (Heroname) overall score?              |")
     print("| what is/tell me (Heroname) combat score?               |")
     print("| what are/tell me (Heroname) ability scores?            |")
-    print("| what teams is (HeroName) on?                           |")
+    print("| what teams is (Heroname) on?                           |")
     print("| where was (Heroname) born?                             |")
     print("| is (Heroname) good or evil?                            |")
     print("| where is (Heroname) base?                              |")
