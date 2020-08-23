@@ -6,6 +6,8 @@ import requests
 import textwrap
 import tkinter as tk
 
+import botresponse as bot_response
+
 from bs4 import BeautifulSoup
 from io import BytesIO
 from operator import itemgetter
@@ -110,22 +112,29 @@ def get_hero_names(hero_name):
         if hero_name in heroes_df.index:
             return hero_name
         else:
-            print("Entity " + hero_name + " not found. Did you mean one of these entities")
+            bot_response.bot_print("Entity " + hero_name + " not found. Did you mean one of these entities")
             temp_name = select_hero_from_tuple_list(did_you_mean_list(hero_name))
             # print(temp_name)
             temp_name = temp_name[0]
     elif len(filtered_list) == 1:
         temp_name = filtered_list[0]
     else:
-        print("Multiple", hero_name, "entities known:")
+        # print("Multiple", hero_name, "entities known:")
+        bot_response.bot_print("Multiple " + hero_name + " entities known:")
         temp_name = select_hero_from_list(filtered_list)
 
     return temp_name
 
 
 # prints text by wraping text to a set width, can be changed with variable text_width
-def print_textwrap(text, text_width=80):
-    print(textwrap.fill(text, width=text_width))
+# style idicates how text should be styled indicated
+def print_textwrap(text, text_width=80, style=0):
+
+    if style == 1:
+        # style with the blue text for the bot
+        bot_response.bot_print(textwrap.fill(text, width=text_width))
+    else:
+        print(textwrap.fill(text, width=text_width))
 
 
 def get_real_name(hero_name):
@@ -137,8 +146,7 @@ def get_real_name(hero_name):
     if pd.isna(real_name):
         real_name = 'unknown'
 
-    print()
-    print(name_check + '\'s real name is', real_name, '\n')
+    bot_response.bot_print('\n' + name_check + '\'s real name is ' + real_name + '\n')
 
 
 def get_superpowers(hero_name):
@@ -156,11 +164,11 @@ def get_superpowers(hero_name):
 
     if powers_list_size == 1:
 
-        print(name_check + '\'s power is ' + powers_list[0])
+        bot_response.bot_print(name_check + '\'s power is ' + powers_list[0])
 
     elif powers_list_size == 2:
 
-        print(name_check + '\'s powers are ' + powers_list[0] + ' and ' + powers_list[1])
+        bot_response.bot_print(name_check + '\'s powers are ' + powers_list[0] + ' and ' + powers_list[1])
 
     elif powers_list_size > 2:
 
@@ -170,10 +178,11 @@ def get_superpowers(hero_name):
 
         powers_out_string = name_check + '\'s powers are ' + concat_string
 
-        print_textwrap(powers_out_string, text_width=100)
+        print_textwrap(powers_out_string, text_width=100, style=1)
 
     else:
-        print(name_check, 'has no powers')
+
+        bot_response.bot_print(name_check + ' has no powers')
 
     print()
 

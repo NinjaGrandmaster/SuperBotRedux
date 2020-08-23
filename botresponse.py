@@ -7,6 +7,12 @@ def rand_index(num):
     return random.randrange(num)
 
 
+def bot_print(text):
+    # print(Fore.LIGHTCYAN_EX)
+    print(Fore.LIGHTCYAN_EX + text + Style.RESET_ALL)
+    # print(Style.RESET_ALL)
+
+
 def help_menu():
 
     help_response_list = ['\nHere are my available functions.',
@@ -16,7 +22,8 @@ def help_menu():
 
     index = rand_index(len(help_response_list))
 
-    print(Fore.LIGHTCYAN_EX + help_response_list[index])
+    # print(Fore.LIGHTCYAN_EX + help_response_list[index])
+    bot_print(help_response_list[index])
 
     print(Fore.LIGHTYELLOW_EX)
     print("-------------------------HELP-----------------------------")
