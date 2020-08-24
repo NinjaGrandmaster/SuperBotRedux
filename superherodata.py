@@ -68,11 +68,17 @@ def select_hero_from_list(hero_list):
         count += 1
 
     while choice < 1 or choice > count:
-        print("Select an Entity. (1-" + str(count) + ")")
-        # choice = int(input("\nWhich  did you mean?(1-" + str(count) + "): "))
-        choice = int(input())
-        if choice < 1 or choice > count:
-            print("\nPlease choose a number between", 1, "and", str(count) + "!")
+        bot_response.bot_print("Select an Entity. (1-" + str(count) + ")")
+
+        try:
+            choice = int(input())  # get user input
+
+            if choice < 1 or choice > count:
+                bot_response.bot_print("\nPlease choose a number between 1 and " + str(count) + "!")
+
+        except ValueError:
+            choice = -5  # set choice out of rangw as a failsafe to continue input loop
+            bot_response.bot_print('\nInput must be an integer between 1 and ' + str(count) + '!')
 
     return hero_list[choice - 1]
 
@@ -94,11 +100,17 @@ def select_hero_from_tuple_list(hero_tup_list):
         count += 1
 
     while choice < 1 or choice > count:
-        print("Select an Entity. (1-" + str(count) + ")")
-        # choice = int(input("\nWhich  did you mean?(1-" + str(count) + "): "))
-        choice = int(input())
-        if choice < 1 or choice > count:
-            print("\nPlease choose a number between", 1, "and", str(count) + "!")
+        bot_response.bot_print("Select an Entity. (1-" + str(count) + ")")
+
+        try:
+            choice = int(input())  # get user input
+
+            if choice < 1 or choice > count:
+                bot_response.bot_print("\nPlease choose a number between 1 and " + str(count) + "!")
+
+        except ValueError:
+            choice = -5  # set choice out of rangw as a failsafe to continue input loop
+            bot_response.bot_print('\nInput must be an integer between 1 and ' + str(count) + '!')
 
     return hero_tup_list[choice-1]
 
