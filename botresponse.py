@@ -59,3 +59,8 @@ def opening():
                   'If you are new around here just ask me for help\n'
 
     print(Fore.LIGHTCYAN_EX + welcome_msg + Style.RESET_ALL)
+
+
+# prints passed in text as light yellow
+def menu_print(text):
+    print(Fore.LIGHTYELLOW_EX + text + Style.RESET_ALL)

@@ -61,9 +61,9 @@ def select_hero_from_list(hero_list):
     # print("\nMultiple entities exist. Please select one.")
     for hero in hero_list:
         if count < 9:
-            print("", count + 1, ". ", hero)
+            bot_response.menu_print(' ' + str(count + 1) + '. ' + hero)
         else:
-            print(count + 1, ". ", hero)
+            bot_response.menu_print(str(count + 1) + '. ' + hero)
 
         count += 1
 
@@ -91,11 +91,11 @@ def select_hero_from_tuple_list(hero_tup_list):
     count = 0
     choice = 0
     # print("\nMultiple entities exist. Please select one.")
-    for i in hero_tup_list:
+    for hero in hero_tup_list:
         if count < 9:
-            print("", count + 1, ". ", i[0])
+            bot_response.menu_print(' ' + str(count+1) + '. ' + hero[0])
         else:
-            print(count + 1, ". ", i[0])
+            bot_response.menu_print(str(count + 1) + '. ' + hero[0])
 
         count += 1
 
