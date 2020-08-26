@@ -78,7 +78,7 @@ if __name__ == '__main__':
             name = decribe_powers.search(userinput).group(1)
             name = check_name_possessiveness(name)
 
-            sd.get_powers_decription(name)
+            sd.get_powers_description(name)
 
         elif overall_score.match(userinput):
 

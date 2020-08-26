@@ -145,7 +145,7 @@ def print_textwrap(text, text_width=80, style=0):
     if style == 1:
         # style with the blue text for the bot
         bot_response.bot_print(textwrap.fill(text, width=text_width))
-    if style == 2:
+    elif style == 2:
         bot_response.paragraph_print(textwrap.fill(text, width=text_width))
     else:
         print(textwrap.fill(text, width=text_width))
@@ -251,13 +251,10 @@ def get_combat_score(hero_name):
 
 def get_teams(hero_name):
     name_check = get_hero_names(hero_name)
-    get_hero_info(name_check, 'teams', query='is part of the')
 
     team_list_string = get_hero_info(name_check, 'teams', option=1)
     # extract teams from the string retrieved from the data set
     team_list = string_list_convert(team_list_string)
-
-    print(team_list)
 
     team_list_size = len(team_list)
 
@@ -275,7 +272,7 @@ def get_teams(hero_name):
         team_out_string = name_check + '\'s teams are ' + concat_string
 
         print()
-        print_textwrap(team_out_string, text_width=100)
+        print_textwrap(team_out_string, text_width=100, style=1)
         print()
 
 
