@@ -34,7 +34,11 @@ if __name__ == '__main__':
     teams = re.compile(r'([wW]hich|[wW]hat) teams? is (.*) (on|a part of)\??')
     birthplace = re.compile(r'[wW]here was (.*) born')
     base_location = re.compile(r'[wW]here is (.*) base')
-    good_or_bad = re.compile(r'[iI]s (.*) (good|bad|evil)|(good or bad)|(good or evil)')
+
+    # good_or_bad = re.compile(r'[iI]s (.*) (good|bad|evil)|(good or bad)|(good or evil)')
+
+    alignment = re.compile(r'[iI]s (.*) (good or evil|evil or good|bad or good|good or bad)(.*)')
+
     height = re.compile(r'[hH]ow tall is (.*)')
     ending_quest = re.compile(r'(.*)\?')  # used to remove a trailing ? from the height regex
     weight = re.compile(r'(([hH]ow much does)|([wW]hat does)) (.*) weigh\??')
@@ -124,8 +128,8 @@ if __name__ == '__main__':
 
             sd.get_base(name)
 
-        elif good_or_bad.match(userinput):
-            name = good_or_bad.search(userinput).group(1)
+        elif alignment.match(userinput):
+            name = alignment.search(userinput).group(1)
 
             sd.get_alignment(name)
 
