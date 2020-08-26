@@ -357,7 +357,7 @@ def get_hero_history(hero_name, option=0):
         history_text = 'Backstory unknown for ' + name_check
 
     print()
-    print_textwrap(history_text, text_width=100)
+    print_textwrap(history_text, text_width=100, style=2)
     print()
 
 
@@ -369,7 +369,7 @@ def get_occupation(hero_name):
     if pd.isna(occupations):
         occupations = 'unknown'
 
-    print(name_check, 'occupation(s)', occupations)
+    bot_response.bot_print('\n' + name_check + ' occupation(s): ' + occupations + '\n')
 
 
 def get_relatives(hero_name):
@@ -380,8 +380,8 @@ def get_relatives(hero_name):
     if pd.isna(relatives):
         relatives = 'unknown'
 
-    print(name_check, 'relative(s)')
-    print_textwrap(relatives, text_width=100)
+    bot_response.bot_print('\n' + name_check + '\'s relative(s):')
+    print_textwrap(relatives, text_width=100, style=2)
     print()
 
 
@@ -391,6 +391,9 @@ def get_hero_image(hero_name):
     # print('Extension_part', image_url, type(image_url))
 
     if not pd.isna(image_url):
+
+        bot_response.bot_print('\nHere is ' + name_check + '\'s picture\n')
+
         root = tk.Tk()
         full_image_url = "https://www.superherodb.com" + image_url
         response = requests.get(full_image_url)
@@ -401,7 +404,7 @@ def get_hero_image(hero_name):
         panel2 = tk.Label(root, justify=tk.LEFT, padx=10, text=name_check).pack(side="top")
         root.mainloop()
     else:
-        print('No images of', name_check, 'exist')
+        bot_response.bot_print('\n' + 'No images of ' + name_check + ' exist\n')
 
 
 def get_ability_scores(hero_name):
