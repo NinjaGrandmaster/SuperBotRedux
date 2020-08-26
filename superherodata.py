@@ -201,7 +201,7 @@ def get_superpowers(hero_name):
     print()
 
 
-def get_powers_decription(hero_name):
+def get_powers_description(hero_name):
     missing_data_text = 'Powers description not available in data banks'
 
     name_check = get_hero_names(hero_name)
@@ -234,11 +234,11 @@ def get_overall_score(hero_name):
     inf_unicode = "\u221E"  # unicode of the infinity symbol
 
     if o_score == inf_unicode:
-        print('\n' + name_check + ' has an infinite overall score!!!\n')
+        bot_response.bot_print('\n' + name_check + ' has an infinite overall score!!!\n')
     elif o_score == '-':
-        print('\nInsufficient data to compute an overall score for entity ' + name_check + '\n')
+        bot_response.bot_print('\nInsufficient data to compute an overall score for entity ' + name_check + '\n')
     else:
-        print('\n' + name_check + '\'s overall score is ' + o_score + '\n ')
+        bot_response.bot_print('\n' + name_check + '\'s overall score is ' + o_score + '\n ')
 
 
 def get_combat_score(hero_name):
@@ -246,7 +246,7 @@ def get_combat_score(hero_name):
 
     c_score = get_hero_info(name_check, 'combat_score', option=1)
 
-    print('\n' + name_check + '\'s combat score is ' + str(c_score) + '\n')
+    bot_response.bot_print('\n' + name_check + '\'s combat score is ' + str(c_score) + '\n')
 
 
 def get_teams(hero_name):
