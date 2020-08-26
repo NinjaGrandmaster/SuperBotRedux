@@ -61,6 +61,11 @@ def opening():
     print(Fore.LIGHTCYAN_EX + welcome_msg + Style.RESET_ALL)
 
 
+# prints text as light blue
+def paragraph_print(text):
+    print(Fore.LIGHTBLUE_EX + text + Style.RESET_ALL)
+
+
 # prints passed in text as light yellow
 def menu_print(text):
     print(Fore.LIGHTYELLOW_EX + text + Style.RESET_ALL)

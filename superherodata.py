@@ -145,6 +145,8 @@ def print_textwrap(text, text_width=80, style=0):
     if style == 1:
         # style with the blue text for the bot
         bot_response.bot_print(textwrap.fill(text, width=text_width))
+    if style == 2:
+        bot_response.paragraph_print(textwrap.fill(text, width=text_width))
     else:
         print(textwrap.fill(text, width=text_width))
 
@@ -220,7 +222,7 @@ def get_powers_decription(hero_name):
 
     # print powers description
     print()
-    print_textwrap(powers_text, text_width=100)
+    print_textwrap(powers_text, text_width=100, style=2)
     print()
 
 
