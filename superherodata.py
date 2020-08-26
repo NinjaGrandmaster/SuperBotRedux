@@ -281,11 +281,10 @@ def get_alignment(hero_name):
 
     alignment = get_hero_info(name_check, 'alignment', option=1)
 
-    print()
     if pd.isna(alignment):
-        print(name_check + '\'s alignment is unknown\n')
+        bot_response.bot_print('\n' + name_check + '\'s alignment is unknown\n')
     else:
-        print(name_check + ' is considered to be ' + alignment, '\n')
+        bot_response.bot_print('\n' + name_check + ' is considered to be ' + alignment + '\n')
 
 
 def get_birth_place(hero_name):
@@ -296,8 +295,7 @@ def get_birth_place(hero_name):
     if pd.isna(birth_place):
         birth_place = 'unknown'
 
-    print()
-    print(name_check + ' \'s place of bith is ' + birth_place + '\n')
+    bot_response.bot_print('\n' + name_check + '\'s place of bith is ' + birth_place + '\n')
 
 
 def get_base(hero_name):
@@ -308,8 +306,7 @@ def get_base(hero_name):
     if pd.isna(base_location):
         base_location = 'unknown'
 
-    print()
-    print(name_check + '\'s base(s): ' + base_location + '\n')
+    bot_response.bot_print('\n' + name_check + '\'s base(s): ' + base_location + '\n')
 
 
 def get_height(hero_name):
@@ -317,15 +314,15 @@ def get_height(hero_name):
 
     height = get_hero_info(name_check, 'height', option=1)
 
-    print()
     if height == '-':
-        print(name_check + '\'s height is unknown\n')
+        bot_response.bot_print('\n' + name_check + '\'s height is unknown\n')
     else:
         # array of the format ["6'4", 'dot', '193', 'cm']
         # index 0 has height in ft, index 2 had height in cm
         height_array = height.split()
 
-        print(name_check + '\'s height is ' + height_array[0] + ' (' + height_array[2] + ' cm)\n')
+        bot_response\
+            .bot_print('\n' + name_check + '\'s height is ' + height_array[0] + ' (' + height_array[2] + ' cm)\n')
 
 
 def get_weight(hero_name):
@@ -333,15 +330,15 @@ def get_weight(hero_name):
 
     weight = get_hero_info(name_check, 'weight', option=1)
 
-    print()
     if weight == '-':
-        print(name_check + '\'s weight is unknown\n')
+        bot_response.bot_print('\n' + name_check + '\'s weight is unknown\n')
     else:
         # array of the format ['198', 'lb', 'dot', '89', 'kg']
         # index 0 has height in ft, index 2 had height in cm
         weight_array = weight.split()
 
-        print(name_check + '\'s weighs ' + weight_array[0] + ' lb (' + weight_array[3] + ' kg)\n')
+        bot_response\
+            .bot_print('\n' + name_check + '\'s weighs ' + weight_array[0] + ' lb (' + weight_array[3] + ' kg)\n')
 
 
 # only pick option 1 if you know for sure the name(s) being passed in exist in the data set, other wise leave option as
