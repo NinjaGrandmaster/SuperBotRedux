@@ -484,17 +484,19 @@ def weight_comparison(hero1, hero2):
 
 def battle_1v1():
 
-    print('Welcome to battle simulator')
+    bot_response.bot_print('\nWelcome to battle simulator\n')
 
     hero1_name = input('Enter first hero: ').strip()
     hero1_name = get_hero_names(hero1_name)
-    print(hero1_name, 'ready for battle\n')
+
+    bot_response.bot_print('\n' + hero1_name + ' ready for battle\n')
 
     hero2_name = input('Enter second hero: ').strip()
     hero2_name = get_hero_names(hero2_name)
-    print(hero2_name, 'ready for battle\n')
 
-    print('Simulating', hero1_name, 'vs.', hero2_name)
+    bot_response.bot_print('\n' + hero2_name + ' ready for battle\n')
+
+    bot_response.menu_print('\nSimulating ' + hero1_name + ' vs. ' + hero2_name + '\n')
 
     # get combat scores of the heroes
     hero1_cs = get_hero_info(hero1_name, 'combat_score', option=1)
@@ -509,9 +511,9 @@ def battle_1v1():
 
         # check if the winning hero had any powers
         if not power:
-            print(hero1_name, 'defeats', hero2_name)
+            battle_outcome = '\n' + hero1_name + ' defeats ' + hero2_name + '\n'
         else:
-            print(hero1_name, 'defeats', hero2_name, 'using', power)
+            battle_outcome = '\n' + hero1_name + ' defeats ' + hero2_name + ' using ' + power + '\n'
 
     elif int(hero1_cs) < int(hero2_cs):
         # get a random power from the wining hero
@@ -519,14 +521,14 @@ def battle_1v1():
 
         # check if the winning hero had any powers
         if not power:
-            print(hero2_name, 'defeats', hero1_name)
+            battle_outcome = '\n' + hero2_name + ' defeats ' + hero2_name + '\n'
         else:
-            print(hero2_name, 'defeats', hero1_name, 'using', power)
+            battle_outcome = '\n' + hero2_name + ' defeats ' + hero1_name + ' using ' + power + '\n'
 
     else:
-        print(hero1_name, 'and', hero2_name, 'are evenly matched')
+        battle_outcome = '\n' + hero1_name + ' and ' + hero2_name + ' are evenly matched\n'
 
-    print('Battle Over \n')
+    bot_response.bot_print(battle_outcome + '\nBattle Over \n')  # print battle outcome
 
 
 # get the superpowers or heroes from the data set which are stored as a string in the following form
