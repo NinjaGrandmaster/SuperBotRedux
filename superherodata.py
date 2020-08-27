@@ -611,8 +611,9 @@ def get_random_history():
 
     name = heroes_df_csv.at[index, 'name']  # get name of hero
 
-    # dsisplay history
-    print('\nThis is the history of', name)
+    # display history
+    bot_response.bot_print('\nThis is the history of ' + name)
+
     get_hero_history(name, option=1)
 
 
