@@ -587,12 +587,13 @@ def get_news():
             filtered_news = filtered_news[5:]  # remove the 5 already displayed articles from list
 
             # show user the remaining articles and ask if they want to see more
-            print('Articles Remaining:', len(filtered_news))
+            bot_response.menu_print('\nArticles Remaining:' + str(len(filtered_news)) + '\n')
+
             user_input = input('Would you like to see more news? > ')
-            print()
+            print('')
 
         elif num_articles == 0:
-            print("No articles available\n")
+            bot_response.menu_print("\nNo articles available\n")
             break
 
         else:
@@ -601,7 +602,7 @@ def get_news():
                 print(filtered_news[i][0])
                 print(filtered_news[i][1], '\n')
 
-            print("End of available articles\n")
+            bot_response.menu_print("\nEnd of available articles\n")
             break
 
 
