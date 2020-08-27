@@ -424,6 +424,18 @@ def get_ability_scores(hero_name):
     bot_response.bot_print(score_string)
 
 
+# function made to format the array retrived froim data set in to an easy to read string in the from 180 lb (82 kg)
+# function should only be used in weight comparison function
+def format_weight_array(weight_array):
+
+    if len(weight_array) == 1 and weight_array[0] == '-':
+        return '(weight unknown)'
+    elif len(weight_array) == 5:
+        return weight_array[0] + ' lb (' + weight_array[3] + ' kg)'
+    else:
+        return 'Error formatting weight array'
+
+
 def weight_comparison(hero1, hero2):
     hero1_name = get_hero_names(hero1)
     hero2_name = get_hero_names(hero2)
@@ -433,26 +445,41 @@ def weight_comparison(hero1, hero2):
     hero2_weight_raw = get_hero_info(hero2_name, 'weight', option=1)
 
     # split the weighs string to get value for comparison
+    # arrays of the format ['198', 'lb', 'dot', '89', 'kg']
+    # index 0 has weight in lb, index 2 had weight in kg
     weight_list1 = hero1_weight_raw.split()
     weight_list2 = hero2_weight_raw.split()
+
+    hero1_weight_string = format_weight_array(weight_list1)
+    hero2_weight_string = format_weight_array(weight_list2)
 
     # get the first value in the weight lists for comparison
     hero1_weight = weight_list1[0]
     hero2_weight = weight_list2[0]
 
+    output_string = ''
+
     if hero1_weight == '-' or hero2_weight == '-':
-        print("Cannot compare " + hero1_name + " ("
-              + hero1_weight_raw + ") and " + hero2_name + " (" + hero2_weight_raw + ")")
+
+        output_string = "\nCannot compare " + hero1_name + ' - ' + hero1_weight_string \
+                        + ' and ' + hero2_name + ' - ' + hero2_weight_string + '\n'
 
     elif int(hero1_weight) > int(hero2_weight):
-        print(hero1_name + " (" + hero1_weight_raw + ") weighs more than " + hero2_name + " (" + hero2_weight_raw + ")")
+
+        output_string = '\n' + hero1_name + ' - ' + hero1_weight_string + ' weighs more than ' \
+                        + hero2_name + ' - ' + hero2_weight_string + '\n'
 
     elif int(hero1_weight) < int(hero2_weight):
-        print(hero2_name + " (" + hero2_weight_raw + ") weighs more than " + hero1_name + " (" + hero1_weight_raw + ")")
+
+        output_string = '\n' + hero2_name + ' - ' + hero2_weight_string + ' weighs more than ' \
+                        + hero1_name + ' - ' + hero1_weight_string + '\n'
 
     else:
-        print(hero1_name + " (" + hero1_weight_raw + ") and "
-              + hero2_name + " (" + hero2_weight_raw + ") weigh the same.")
+
+        output_string = '\n' + hero1_name + ' - ' + hero1_weight_string + ' and ' \
+                        + hero2_name + ' - ' + hero2_weight_string + ' weigh the same\n'
+
+    bot_response.bot_print(output_string)
 
 
 def battle_1v1():
