@@ -411,14 +411,17 @@ def get_ability_scores(hero_name):
     name_check = get_hero_names(hero_name)
 
     scores = heroes_df.loc[name_check, 'intelligence_score':'power_score']
-    scores_list = scores.tolist()
-    # print(scores)
-    print('\n---', name_check, '---')
-    print('Intelligence:', scores[0])
-    print('Strength:', scores_list[1])
-    print('Speed:', scores_list[2])
-    print('Durability:', scores_list[3])
-    print('Power:', scores_list[4], '\n')
+
+    scores_list = scores.tolist()  # convert query to list to easily access scores
+
+    score_string = '\n--- ' + name_check + '\'s ability scores ---\n' \
+                   + 'Intelligence: ' + str(scores_list[0]) + '\n' \
+                   + 'Strength: ' + str(scores_list[1]) + '\n' \
+                   + 'Speed: ' + str(scores_list[2]) + '\n' \
+                   + 'Durability: ' + str(scores_list[3]) + '\n' \
+                   + 'Power: ' + str(scores_list[4]) + '\n'
+
+    bot_response.bot_print(score_string)
 
 
 def weight_comparison(hero1, hero2):
