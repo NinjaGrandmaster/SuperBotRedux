@@ -50,7 +50,8 @@ if __name__ == '__main__':
     battle_1v1 = re.compile(r'([sS]tart [bB]attle)|([bB]attle)')
     latest_news = re.compile(r'(.*)latest(\ssuperhero)?\snews')
     random_hero_story = \
-        re.compile(r'(.*)((history|backstory) of a random hero)(.*)|(.*)(random (history|backstory))(.*)')
+        re.compile(r'(.*)((history|backstory) of a random (hero|superhero))(.*)|(.*)(random (history|backstory))(.*)'
+                   r'|(.*)random (.*)(history|backstory)(.*)')
 
     help_menu = re.compile(r'(.*)help(.*)')
 

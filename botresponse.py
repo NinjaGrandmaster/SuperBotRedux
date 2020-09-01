@@ -34,7 +34,7 @@ def help_menu():
     print("| describe (Heroname)'s powers                           |")
     print("| what does (Heroname) look like?                        |")
     print("| what is (Heroname) occupation/job?                     |")
-    print("| give me the history on a random hero.                  |")
+    print("| tell me the history of a random superhero              |")
     print("| who are (Heroname) relatives?                          |")
     print("| what is/tell me (Heroname) real name?                  |")
     print("| what is/tell me (Heroname) overall score?              |")
