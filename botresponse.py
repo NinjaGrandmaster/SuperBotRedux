@@ -68,3 +68,16 @@ def opening():
                   'If you are new around here just ask me for help\n'
 
     print(Fore.LIGHTCYAN_EX + welcome_msg + Style.RESET_ALL)
+
+
+def input_error_response():
+
+    error_response_list = ['Error Processing input',
+                           'Sorry, I did not understand your input',
+                           'Sorry, I am still learning to process human input can you repeat your input.',
+                           'I did not understand input, please check the spelling of your input.',
+                           'Input Error. Type help me to see examples of valid input']
+
+    index = rand_index(len(error_response_list))
+
+    bot_print('\n' + error_response_list[index] + '\n')

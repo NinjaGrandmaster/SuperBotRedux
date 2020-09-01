@@ -193,4 +193,5 @@ if __name__ == '__main__':
             br.help_menu()
 
         else:
-            print('Error processing input')
+
+            br.input_error_response()
