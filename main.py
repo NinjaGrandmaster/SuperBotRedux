@@ -61,7 +61,7 @@ if __name__ == '__main__':
         userinput = input("> ")
 
         if userinput == "exit":
-            print("Goodbye")
+            br.closing()
             sys.exit(0)
 
         # decision tree
@@ -193,5 +193,4 @@ if __name__ == '__main__':
             br.help_menu()
 
         else:
-
             br.input_error_response()

@@ -70,6 +70,19 @@ def opening():
     print(Fore.LIGHTCYAN_EX + welcome_msg + Style.RESET_ALL)
 
 
+def closing():
+
+    closing_response = ['Goodbye',
+                        'See you next time',
+                        'Thanks for stopping by. Have a nice day',
+                        'Time for a nap',
+                        'Systems shutting down']
+
+    index = rand_index(len(closing_response))
+
+    bot_print('\n' + closing_response[index] + '\n')
+
+
 def input_error_response():
 
     error_response_list = ['Error Processing input',
