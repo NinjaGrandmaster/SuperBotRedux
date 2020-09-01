@@ -457,8 +457,6 @@ def weight_comparison(hero1, hero2):
     hero1_weight = weight_list1[0]
     hero2_weight = weight_list2[0]
 
-    output_string = ''
-
     if hero1_weight == '-' or hero2_weight == '-':
 
         output_string = "\nCannot compare " + hero1_name + ' - ' + hero1_weight_string \
