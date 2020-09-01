@@ -7,10 +7,19 @@ def rand_index(num):
     return random.randrange(num)
 
 
+# prints text as light cyan. This method should only be used to display bot dialog.
 def bot_print(text):
-    # print(Fore.LIGHTCYAN_EX)
     print(Fore.LIGHTCYAN_EX + text + Style.RESET_ALL)
-    # print(Style.RESET_ALL)
+
+
+# prints text as light blue
+def paragraph_print(text):
+    print(Fore.LIGHTBLUE_EX + text + Style.RESET_ALL)
+
+
+# prints passed in text as light yellow
+def menu_print(text):
+    print(Fore.LIGHTYELLOW_EX + text + Style.RESET_ALL)
 
 
 def help_menu():
@@ -59,13 +68,3 @@ def opening():
                   'If you are new around here just ask me for help\n'
 
     print(Fore.LIGHTCYAN_EX + welcome_msg + Style.RESET_ALL)
-
-
-# prints text as light blue
-def paragraph_print(text):
-    print(Fore.LIGHTBLUE_EX + text + Style.RESET_ALL)
-
-
-# prints passed in text as light yellow
-def menu_print(text):
-    print(Fore.LIGHTYELLOW_EX + text + Style.RESET_ALL)
