@@ -94,3 +94,15 @@ def input_error_response():
     index = rand_index(len(error_response_list))
 
     bot_print('\n' + error_response_list[index] + '\n')
+
+
+def general_response():
+
+    general_dialog = ['How else may I assist you?',
+                      'Hope this information was useful',
+                      'Interesting information don\'t you think',
+                      'Dispatching additional recon drones']
+
+    index = rand_index(len(general_dialog))
+
+    bot_print('\n' + general_dialog[index] + '\n')

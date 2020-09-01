@@ -194,3 +194,5 @@ if __name__ == '__main__':
 
         else:
             br.input_error_response()
+
+        br.general_response()  # random bot dialog
