@@ -190,8 +190,6 @@ if __name__ == '__main__':
 
         elif help_menu.match(userinput):
 
-            print('display help menu')
-
             br.help_menu()
 
         else:
